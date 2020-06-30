@@ -1,9 +1,9 @@
 # pycracker
 ![GitHub issues](https://img.shields.io/github/issues/satcom886/pycracker)
 
-**Warning**: The program is in it's very early stages. The project aims for full compatibility with Hashcat's commands and arguments.  
+**Warning**: The program is in it's very early stages. The project aims for compatibility with [Hashtopolis](https://github.com/s3inlc/hashtopolis).  
 The documentation below might be outdated and/or inaccurate.  
-Most of the code is just a placeholder so that I can focus on making the actual cracking logic. After I have *a* cracker, I will focus on compatibility with Hashcat.  
+Most of the code is just a placeholder so that I can focus on making the actual cracking logic. After I have *a* cracker, I will focus on compatibility with Hashtopolis.  
 **I *probably* know if the program is completely broken.** There are big changes being made to the code so I won't even attempt to keep a working version for now.
 
 ---
