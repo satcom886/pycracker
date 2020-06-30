@@ -8,6 +8,7 @@ import itertools
 import string
 from tqdm import tqdm
 import math
+import psutil
 
 def figure_out_charset(characters):
     # Maybe this could be done a bit better?
@@ -86,31 +87,50 @@ def solve_md5(userhash, maxlen, charset, possiblecombinations):
 # charset_and_possiblecombinations = figure_out_charset(sys.argv[-2])
 # solve_md5(sys.argv[-3], int(sys.argv[-4]), charset_and_possiblecombinations[0], int(charset_and_possiblecombinations[1]))
 
-
-passlen = 4
-charset = string.ascii_letters + string.digits
-combinations = len(charset) ** int(passlen)
-numcores = 2
-percore = math.floor(combinations / numcores)
-
-print("Characer set: " + charset)
-print("Total combinations: " + str(combinations))
-print("Iterarions per core: " + str(percore))
-for coreno in range(1, numcores + 1):
-    range_end = math.floor(((combinations / numcores) * coreno))
-    range_start = math.floor(range_end - percore)
-    print(str(coreno) + ": " + str(range_start) + " - " + str(range_end))
-print("Now calculating the ranges...")
-# Here the range is calculated (000 - 250 with 4 cores)
-for coreno in range(1, numcores + 1):
-    range_end = math.floor(((combinations / numcores) * coreno))
-    range_start = math.floor(range_end - percore)
+def calculate_password_ranges(core_number, keyspace_start, keyspace_end):
+    print("Now calculating the ranges...")
     attemptno = 0
-    for attempt in itertools.product(charset, repeat=passlen):
-        if attemptno == range_start:
-            print("Core " + str(coreno) + ": " + ''.join(attempt), end=" - ")
-        elif attemptno == range_end:
-            print(''.join(attempt))
-        elif attemptno == (range_end - 1) and attemptno + 1 == combinations:
-            print(''.join(attempt))
+    ranges =  []
+    for attempt in itertools.product(characterset, repeat=password_length):
+        if attemptno == keyspace_start:
+            ranges.append(''.join(attempt))
+        elif attemptno == keyspace_end:
+            ranges.append(''.join(attempt))
+            return ranges
+        elif attemptno == (keyspace_end - 1) and attemptno + 1 == total_combinations:
+            ranges.append(''.join(attempt))
+            return ranges
         attemptno += 1
+
+def calculate_keyspaces(core_number):
+    range_end = math.floor(((total_combinations / number_of_cores) * core_number))
+    range_start = math.floor(range_end - percore)
+    print("Core " + str(core_number) + ": " + str(range_start) + " - " + str(range_end))
+    return [range_start, range_end]
+
+def print_info():
+    print("Characer set: " + characterset)
+    print("Total combinations: " + str(total_combinations))
+    print("Iterarions per core: " + str(percore))
+    print("Number of detected cores: " + str(number_of_cores))
+
+def calculate_total_combinations():
+    return len(characterset) ** int(password_length)
+
+def calculate_passwords_per_core():
+    return math.floor(total_combinations / number_of_cores)
+
+# Variables for testing
+mode = "bruteforce"
+password_length = 4
+characterset = string.ascii_letters
+
+# Global variables
+number_of_cores = psutil.cpu_count(logical = True)
+total_combinations = calculate_total_combinations()
+percore = calculate_passwords_per_core()
+
+print_info()
+for core_number in range(1, number_of_cores + 1):
+    ranges = calculate_keyspaces(core_number)
+    print(calculate_password_ranges(core_number, ranges[0], ranges[1]))
