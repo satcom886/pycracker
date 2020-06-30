@@ -111,7 +111,7 @@ def calculate_keyspaces(core_number):
 def print_info():
     print("Characer set: " + characterset)
     print("Total combinations: " + str(total_combinations))
-    print("Iterarions per core: " + str(percore))
+    print("Iterations per core: " + str(percore))
     print("Number of detected cores: " + str(number_of_cores))
 
 def calculate_total_combinations():
