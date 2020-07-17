@@ -21,7 +21,7 @@ function test_python {
 }
 
 function check_if_builds_exist {
-    if nuitka3 --version > /dev/null && ! [ -f pycracker.bin ]; then
+    if nuitka3 --version > /dev/null || nuitka --version > /dev/null && ! [ -f pycracker.bin ]; then
         echo "${red}Nuitka build should exist, yet it doesn't!${reset}"
         exit 1
     fi

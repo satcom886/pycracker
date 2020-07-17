@@ -6,9 +6,9 @@ reset=$(tput sgr0)
 
 function build_nuitka {
     echo "${green}Now building with Nuitka...${reset}"
-    if nuitka3 --version; then
+    if nuitka3 --version > /dev/null; then
         nuitka3 --remove-output __main__.py -o pycracker.bin
-    elif nuitka --version; then
+    elif nuitka --version > /dev/null; then
         nuitka --remove-output __main__.py -o pycracker.bin
     fi
 }
