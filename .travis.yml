@@ -11,8 +11,10 @@ arch:
  - amd64
  - arm64
  - s390x
+before_install:
+  - sudo apt -y install zip nuitka
 install:
   - pip install -r requirements.txt
 script:
   - ./build
-  - python pycracker.zip
+  - ./test

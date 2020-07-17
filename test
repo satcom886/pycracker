@@ -1,0 +1,31 @@
+#!/bin/bash
+
+function test_nuitka {
+    echo "Only the Nuitka build was found."
+    ./pycracker.bin
+}
+
+function test_python {
+    echo "Only the ZIP build was found."
+    python pycracker.zip
+}
+
+function test_both {
+    echo "Both builds were detected."
+    echo "Will try both"
+    ./pycracker.bin
+    python pycracker.zip
+}
+
+if [ -f pycracker.bin ] && [ -f pycracker.zip ]; then
+    test_both
+elif [ -f pycracker.bin ]; then
+    test_nuitka
+elif [ -f pycracker.zip ]; then
+    test_python
+else
+    echo "No build found!"
+    echo "This probably means the build failed."
+    echo "Giving up..."
+    return 1
+fi
