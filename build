@@ -1,29 +1,32 @@
 #!/bin/bash
 
 function build_nuitka {
-    echo "Nuitka was found on your system."
-    echo "Building an optimized binary..."
-    nuitka3 --remove-output __main__.py -o pycracker.bin
+    if nuitka3 --version; then
+        nuitka3 --remove-output __main__.py -o pycracker.bin
+    elif nuitka --version; then
+        nuitka --remove-output __main__.py -o pycracker.bin
 }
 
 function build_python {
-    echo "Only ZIP was detected."
-    echo "Building a normal Python ZIP..."
     zip -r pycracker.zip __main__.py pycracker -x "*__pycache__*"
 }
 
 function build_both {
-    echo "Nuitka and ZIP were both detected."
-    echo "Will use both"
-    nuitka3 --remove-output __main__.py -o pycracker.bin
-    zip -r pycracker.zip __main__.py pycracker -x "*__pycache__*"
+    build_nuitka
+    build_python
 }
 
-if nuitka3 --version && zip --version; then
+if [ nuitka3 --version || nuitka --version ] && zip --version; then
+    echo "Nuitka and ZIP were both detected."
+    echo "Will use both"
     build_both
-elif nuitka3 --version; then
+elif [ nuitka3 --version || nuitka --version ]; then
+    echo "Nuitka was found on your system."
+    echo "Building an optimized binary..."
     build_nuitka
 elif zip --version; then
+    echo "Only ZIP was detected."
+    echo "Building a normal Python ZIP..."
     build_python
 else
     echo "Neither zip or nuitka were found on your system!"
