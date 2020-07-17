@@ -5,43 +5,47 @@ green=$(tput setaf 2)
 reset=$(tput sgr0)
 
 function test_nuitka {
+    echo "${green}Now testing the Nuitka build...${reset}"
     if ! ./pycracker.bin; then
         echo "${red}The Nuitka build doesn't work!${reset}"
-        return 1
+        exit 1
+    fi
 }
 
 function test_python {
+    echo "${green}Now testing the Python ZIP...${reset}"
     if ! python pycracker.zip; then
         echo "${red}The Python ZIP doesn't work!${reset}"
-        return 1
+        exit 1
+    fi
 }
 
 function check_if_builds_exist {
-    if nuitka3 --version > /dev/null || ! [ -f pycracker.bin]; then
+    if nuitka3 --version > /dev/null && ! [ -f pycracker.bin ]; then
         echo "${red}Nuitka build should exist, yet it doesn't!${reset}"
-        return 1
+        exit 1
     fi
-    if zip --version > /dev/null || ! [ -f pycracker.zip ]; then
+    if zip --version > /dev/null && ! [ -f pycracker.zip ]; then
         echo "${red}Python ZIP should exist, yet it doesn't!${reset}"
-        return 1
+        exit 1
     fi
 }
 
 function detect_and_test {
     if nuitka3 --version > /dev/null || nuitka --version > /dev/null && zip --version > /dev/null; then
-        echo "${green}Nuitka and ZIP were both detected.${reset}"
+        echo "${green}Will test both builds.${reset}"
         test_python
         test_nuitka
     elif [ nuitka3 --version || nuitka --version ]; then
-        echo "${green}Only Nuitka was found on your system.${reset}"
+        echo "${green}Will only test the Nuitka build.${reset}"
         test_nuitka
     elif zip --version; then
-        echo "${green}Only ZIP was detected.${reset}"
+        echo "${green}Will only test the Python ZIP.${reset}"
         test_python
     else
-        echo "${red}Neither zip or nuitka were found on your system!"
+        echo "${red}Neither zip or Nuitka were found on your system!"
         echo "Giving up...${reset}"
-        return 1
+        exit 1
     fi
 }
 

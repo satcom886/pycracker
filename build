@@ -6,7 +6,11 @@ reset=$(tput sgr0)
 
 function build_nuitka {
     echo "${green}Now building with Nuitka...${reset}"
-    nuitka3 --remove-output __main__.py -o pycracker.bin
+    if nuitka3 --version; then
+        nuitka3 --remove-output __main__.py -o pycracker.bin
+    elif nuitka --version; then
+        nuitka --remove-output __main__.py -o pycracker.bin
+    fi
 }
 
 function build_python {
@@ -27,5 +31,5 @@ elif zip --version; then
 else
     echo "${red}Neither zip or nuitka were found on your system!"
     echo "Giving up...${reset}"
-    return 1
+    exit 1
 fi
