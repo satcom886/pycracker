@@ -5,6 +5,7 @@ function build_nuitka {
         nuitka3 --remove-output __main__.py -o pycracker.bin
     elif nuitka --version; then
         nuitka --remove-output __main__.py -o pycracker.bin
+    fi
 }
 
 function build_python {
@@ -16,7 +17,7 @@ function build_both {
     build_python
 }
 
-if [ nuitka3 --version || nuitka --version ] && zip --version; then
+if nuitka3 --version || nuitka --version && zip --version; then
     echo "Nuitka and ZIP were both detected."
     echo "Will use both"
     build_both
