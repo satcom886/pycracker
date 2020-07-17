@@ -9,12 +9,10 @@ dist: bionic
 arch:
  - amd64
 before_install:
-  - wget -O - http://nuitka.net/deb/archive.key.gpg | sudo apt-key add -
-  - echo "deb http://nuitka.net/deb/stable/bionic bionic main" | sudo tee /etc/apt/sources.list.d/nuitka.list
-  - sudo apt update
-  - sudo apt -y install zip nuitka
+  - sudo apt -y install zip
 install:
   - pip install -r requirements.txt
+  - pip install nuitka
 script:
   - ./build
   - ./test
