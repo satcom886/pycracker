@@ -1,3 +1,9 @@
 # Ignore Nuitka builds
 *.bin
 *.build
+
+# Ignore the python build
+*.zip
+
+# Ignore python's cache
+__pycache__
