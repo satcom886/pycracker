@@ -4,8 +4,13 @@ python:
   - "3.6"
   - "3.7"
   - "3.8"
-dist: xenial
-sudo: true
+  - "nightly"
+os: linux
+dist: bionic
+arch:
+ - amd64
+ - arm64
+ - s390x
 install:
   - pip install -r requirements.txt
 script:
