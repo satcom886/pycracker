@@ -8,6 +8,7 @@ os: linux
 dist: bionic
 arch:
  - amd64
+ - arm64
 before_install:
   - sudo apt -y install zip
 install:
