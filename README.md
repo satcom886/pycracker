@@ -1,5 +1,6 @@
 # pycracker
 ![GitHub issues](https://img.shields.io/github/issues/satcom886/pycracker)
+[![Build Status](https://travis-ci.com/satcom886/pycracker.svg?branch=master)](https://travis-ci.com/satcom886/pycracker)
 
 **Warning**: The program is in it's very early stages. The project aims for compatibility with [Hashtopolis](https://github.com/s3inlc/hashtopolis).  
 The documentation below might be outdated and/or inaccurate.  
