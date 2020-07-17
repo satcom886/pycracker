@@ -15,7 +15,7 @@ def calculate_keyspace(core_number, total_combinations, number_of_cores, percore
     return [range_start, range_end]
 
 def get_keyspace_start_end(keyspace_start_pos, keyspace_end_pos, characterset, password_length, total_combinations):
-    attemptno = keyspace_start_pos - 1
+    attemptno = 0
     ranges =  []
     for attempt in itertools.product(characterset, repeat=password_length):
         if attemptno == keyspace_start_pos:
