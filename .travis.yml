@@ -11,6 +11,10 @@ arch:
  - amd64
  - arm64
  - s390x
+addons:
+  apt:
+    sources:
+      - universe
 before_install:
   - sudo apt -y install zip nuitka
 install:
