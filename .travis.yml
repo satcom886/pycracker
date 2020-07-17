@@ -13,7 +13,7 @@ addons:
     sources:
       - universe
 before_install:
-  - sudo apt -y install zip
+  - sudo apt -y install zip nuitka
 install:
   - pip install -r requirements.txt
 script:

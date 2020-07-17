@@ -1,32 +1,31 @@
 #!/bin/bash
 
+red=$(tput setaf 1)
+green=$(tput setaf 2)
+reset=$(tput sgr0)
+
 function build_nuitka {
+    echo "${green}Now building with Nuitka...${reset}"
     nuitka3 --remove-output __main__.py -o pycracker.bin
 }
 
 function build_python {
+    echo "${green}Now making a Python ZIP...${reset}"
     zip -r pycracker.zip __main__.py pycracker -x "*__pycache__*"
 }
 
-function build_both {
-    build_nuitka
+if nuitka3 --version > /dev/null || nuitka --version > /dev/null && zip --version > /dev/null; then
+    echo "${green}Nuitka and ZIP were both detected.${reset}"
     build_python
-}
-
-if nuitka3 --version || nuitka --version && zip --version; then
-    echo "Nuitka and ZIP were both detected."
-    echo "Will use both"
-    build_both
+    build_nuitka
 elif [ nuitka3 --version || nuitka --version ]; then
-    echo "Nuitka was found on your system."
-    echo "Building an optimized binary..."
+    echo "${green}Only Nuitka was found on your system.${reset}"
     build_nuitka
 elif zip --version; then
-    echo "Only ZIP was detected."
-    echo "Building a normal Python ZIP..."
+    echo "${green}Only ZIP was detected.${reset}"
     build_python
 else
-    echo "Neither zip or nuitka were found on your system!"
-    echo "Giving up..."
+    echo "${red}Neither zip or nuitka were found on your system!"
+    echo "Giving up...${reset}"
     return 1
 fi
