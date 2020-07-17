@@ -36,10 +36,10 @@ function detect_and_test {
         echo "${green}Will test both builds.${reset}"
         test_python
         test_nuitka
-    elif [ nuitka3 --version || nuitka --version ]; then
+    elif nuitka3 --version > /dev/null || nuitka --version > /dev/null; then
         echo "${green}Will only test the Nuitka build.${reset}"
         test_nuitka
-    elif zip --version; then
+    elif zip --version > /dev/null; then
         echo "${green}Will only test the Python ZIP.${reset}"
         test_python
     else
