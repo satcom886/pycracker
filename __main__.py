@@ -85,7 +85,8 @@ if arguments["attack_mode"] == "bf":
     charset = string.ascii_letters
     if arguments["hash_mode"] == "0":
         if arguments["keyspace_start_pos"] is not None and arguments["keyspace_stop_pos"] is not None:
-            # TODO
+            # TODO: Implement custom keyspace start and end position
+            # NOTE: The calculate_keyspace function needs a different total_combinations argument when using a custom keyspace range.
             pass
         else:
             total_combinations = pycracker.bruteforce.calculate_combinations(password_length, charset)

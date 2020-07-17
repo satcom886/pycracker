@@ -33,15 +33,15 @@ def get_keyspace_start_end(keyspace_start_pos, keyspace_end_pos, characterset, p
 
 def do_everything(total_combinations, number_of_cores, percore, charset, password_length):
     threads = []
-    # Start the threads
     # First calculate the keyspace_start and end (for each thread)
     for i in range(1, number_of_cores + 1):
         keyspace = calculate_keyspace(i, total_combinations, number_of_cores, percore)
         threads.append(threading.Thread(target=get_keyspace_start_end, args=(int(keyspace[0]), int(keyspace[1]), charset, int(password_length), total_combinations)))
     for thread in threads:
         thread.start()
-        # Calculate keyspace_start and keyspace_end (this will be done in threads)
+        # TODO: Find a way to retrieve the keyspace_start and end from the threads
         # Start the dang cracking!
+        # NOTE: These threads will use the previously calculated keyspace_start and end
 
 def start_cracking():
     pass
