@@ -6,7 +6,7 @@ reset=$(tput sgr0)
 
 function test_nuitka {
     echo "${green}Now testing the Nuitka build...${reset}"
-    if ! ./pycracker.bin -a bf -m 0 -l 8; then
+    if ! ./pycracker.bin -a bf -m 0 -l 5; then
         echo "${red}The Nuitka build doesn't work!${reset}"
         exit 1
     fi
@@ -14,7 +14,7 @@ function test_nuitka {
 
 function test_python {
     echo "${green}Now testing the Python ZIP...${reset}"
-    if ! python pycracker.zip -a bf -m 0 -l 8; then
+    if ! python pycracker.zip -a bf -m 0 -l 5; then
         echo "${red}The Python ZIP doesn't work!${reset}"
         exit 1
     fi
