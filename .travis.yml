@@ -7,13 +7,11 @@ os: linux
 dist: bionic
 arch:
  - amd64
- - arm64
-addons:
-  apt:
-    sources:
-      - universe
 before_install:
-  - sudo apt -y install zip
+  - wget -O - http://nuitka.net/deb/archive.key.gpg | sudo apt-key add -
+  - echo "deb http://nuitka.net/deb/stable/bionic bionic main" | sudo tee /etc/apt/sources.list.d/nuitka.list
+  - sudo apt update
+  - sudo apt -y install zip nuitka
 install:
   - pip install -r requirements.txt
 script:
