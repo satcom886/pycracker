@@ -1,11 +1,7 @@
 #!/bin/bash
 
 function build_nuitka {
-    if nuitka3 --version; then
-        nuitka3 --remove-output __main__.py -o pycracker.bin
-    elif nuitka --version; then
-        nuitka --remove-output __main__.py -o pycracker.bin
-    fi
+    nuitka3 --remove-output __main__.py -o pycracker.bin
 }
 
 function build_python {
