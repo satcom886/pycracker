@@ -22,10 +22,10 @@ if nuitka3 --version > /dev/null || nuitka --version > /dev/null && zip --versio
     echo "${green}Nuitka and ZIP were both detected.${reset}"
     build_python
     build_nuitka
-elif [ nuitka3 --version || nuitka --version ]; then
+elif nuitka3 --version > /dev/null || nuitka --version > /dev/null; then
     echo "${green}Only Nuitka was found on your system.${reset}"
     build_nuitka
-elif zip --version; then
+elif zip --version > /dev/null; then
     echo "${green}Only ZIP was detected.${reset}"
     build_python
 else
