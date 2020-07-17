@@ -1,6 +1,3 @@
-#!/usr/bin/python
-# Usage: pycracker.py MAXPASSWORDLENGTH HASH CHARACTERS HASHTYPE
-
 # Import required modules
 import hashlib
 import sys
