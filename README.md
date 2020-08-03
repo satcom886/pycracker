@@ -7,14 +7,13 @@
 The documentation below might be outdated and/or inaccurate.  
 Most of the code is just a placeholder so that I can focus on making the actual cracking logic. After I have *a* cracker, I will focus on compatibility with Hashtopolis.  
 **I *probably* know if the program is completely broken.** There are big changes being made to the code so I won't even attempt to keep a working version for now.
+# UPDATE:
+As of September the 3rd 2020 the repo is read-only. The reason for this is that I no longer need a CPU-only password cracker. More specifically, I found pocl. A universal CPU OpenCL implementation that works beautifully with Hashcat.  
+For this reason I no longer need to develop pycracker.  
+I may come back to this sometime in the future.
 
----
-
-here the old readme begins
-## Why?
-This is a project that aims to create the worlds slowest password cracker. Feel free to hate.
-
-## Any example of what I can do?
+# Old README
+### Any example of what I can do?
 Sure! You can try one of these:
 1. python pycracker.py 4 79c2b46ce2594ecbcb5b73e928345492 a MD5 *->* **ahoj** *almost instant*
 4. python pycracker.py 8 1a5e88fec8cde7e4580c554a8d5775d9 1 MD5 *->* **19672324** *takes about 30 seconds*
